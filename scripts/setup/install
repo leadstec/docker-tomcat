@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -e
+
+clog -t "tomcat: Build process starts ..."
+
+# add image schema
+lcs-cli schema add --section tomcat
+
+# Create the tomcat user and group
+addgroup -S tomcat
+adduser -H -s /sbin/nologin -G tomcat -S -D tomcat
+clog -i "tomcat: tomcat user and group created."
+
+# config tomcat home and related directories and some config templates
+cd ${CATALINA_HOME}
+rm bin/*.bat
+rm -fr webapps/docs webapps/examples logs
+cp -f /scripts/setup/tomcat/tomcat-users.xml conf/tomcat-users.xml
+cp -f /scripts/setup/tomcat/webapps/manager/META-INF/context.xml webapps/manager/META-INF/context.xml
+cp -f /scripts/setup/tomcat/webapps/host-manager/META-INF/context.xml webapps/host-manager/META-INF/context.xml
+chown -R tomcat:tomcat ${CATALINA_HOME}
+# create and link the log directory
+mkdir -p ${TOMCAT_LOG_DIR}
+chown -R tomcat:tomcat ${TOMCAT_LOG_DIR}
+ln -s ${TOMCAT_LOG_DIR} logs
+clog -i "tomcat: Configurations completed in ${CATALINA_HOME}."
+
+# supervisor
+cat > /etc/supervisor.conf.d/tomcat.conf <<EOF
+[program:tomcat]
+directory=/
+command=${CATALINA_HOME}/bin/catalina.sh run
+user=tomcat
+autostart=true
+autorestart=true
+stdout_logfile=${LOG_DIR}/supervisor/%(program_name)s.log
+stderr_logfile=${LOG_DIR}/supervisor/%(program_name)s.log
+EOF
+clog -i "tomcat: Supervisor configuration for tomcat created."
+
+# Create profile for global env in different shells
+cat > /etc/profile.d/tomcat.sh <<EOF
+export CATALINA_HOME=${CATALINA_HOME}
+export TOMCAT_LOG_DIR=${TOMCAT_LOG_DIR}
+EOF
+clog -i "tomcat: Global ENVs added to /etc/profile.d"
+
+# complete
+clog -t "tomcat: Build process completed."

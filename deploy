@@ -1,0 +1,5 @@
+
+tomcat:
+{
+  TOMCAT_ADMIN_PASS="pdaesd";
+}
