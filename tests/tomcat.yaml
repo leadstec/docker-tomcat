@@ -1,0 +1,31 @@
+schemaVersion: '2.0.0'
+
+fileExistenceTests:
+  - name: 'Tomcat run script'
+    path: '/var/tomcat/bin/catalina.sh'
+    shouldExist: true
+    permissions: '-rwxr-x---'
+    isExecutableBy: 'group'
+  - name: 'Tomcat user config'
+    path: '/var/tomcat/conf/tomcat-users.xml'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'Schema file'
+    path: '/etc/lcs/tomcat.json'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+    uid: 0
+    gid: 0
+
+fileContentTests:
+  - name: 'Schema'
+    path: '/etc/lcs/schema.json'
+    expectedContents:
+      - 'TOMCAT_ADMIN'
+
+metadataTest:
+  env:
+    - key: 'TOMCAT_LOG_DIR'
+      value: '/data/log/tomcat'
+  entrypoint: ["lcsd"]
+  cmd: ["run", "start"]
