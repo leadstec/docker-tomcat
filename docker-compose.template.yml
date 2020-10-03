@@ -1,20 +1,20 @@
-version: "3.7"
-# Set -arch=_aarch64 for arm build
-# change major to JRE major version, i.e. 8,9
+version: "3.8"
+
 services:
+
   tomcat:
     build:
       context: .
       args:
-#        - arch=_aarch64
-        - version=8.5.49
+        - arch=
+        - version=9.0.38
         - build=dev
-    image: leadstec/tomcat:8.5.49
+    image: leadstec.tencentcloudcr.com/leadstec/tomcat:9.0.38
     ports:
       - "50521:8080"
     volumes:
-      - ~/volumes-data/tomcat.local/log:/data/log
-      - ~/volumes-data/tomcat.local/persist:/data/persist
+      - ~/volumes/tomcat.local/log:/data/log
+      - ~/volumes/tomcat.local/persist:/data/persist
     env_file:
       - ./env
     environment:

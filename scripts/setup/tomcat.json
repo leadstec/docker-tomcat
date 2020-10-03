@@ -23,19 +23,7 @@
           "type": "1"
         }
       ]
-    },
-    {
-      "name": "TOMCAT_ADMIN_PASS",
-      "default": "{{TOMCAT_ADMIN_PASS_SECRET}}",
-      "replacements": [
-        {
-          "pattern": "{{TOMCAT_ADMIN_PASS}}",
-          "path": "${CATALINA_HOME}/conf/tomcat-users.xml",
-          "type": "1"
-        }
-      ]
     }
-
   ],
   "secrets": [
     {
@@ -43,9 +31,9 @@
       "required": false,
       "replacements": [
         {
-          "name": "TOMCAT_ADMIN_PASS",
+          "name": "TOMCAT_ADMIN_PASSWORD",
           "section": "tomcat",
-          "pattern": "{{TOMCAT_ADMIN_PASS_SECRET}}",
+          "pattern": "{{TOMCAT_ADMIN_PASSWORD}}",
           "path": "${CATALINA_HOME}/conf/tomcat-users.xml"
         }
       ]

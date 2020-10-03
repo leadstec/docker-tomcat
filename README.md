@@ -1,6 +1,36 @@
-使用文档请参考 http://docs.fay.cloud/image/tomcat8/
+# Tomcat image for VCubi Platform
 
-### CHANGELOG
+![Tomcat](https://img.shields.io/badge/Tomcat-9.0.38,_latest-blue)
+![x86_64](https://img.shields.io/badge/x86_64-supported-brightgreen)
+![aarch64](https://img.shields.io/badge/aarch64-supported-brightgreen)
+
+## How to Use
+
+### Pull image
+    # from Docker Hub
+    docker pull leadstec/tomcat:[tag]
+    docker pull leadstec/tomcat-aarch64:[tag]
+    # from Tencent CR
+    docker pull leadstec.tencentcloudcr.com/leadstec/tomcat:[tag]
+    docker pull leadstec.tencentcloudcr.com/leadstec/tomcat-aarch64:[tag]
+
+### Build image
+    docker-compose build tomcat
+
+### LCS Schema & ENV, Secrets
+
+| Variable              | Description               | Default | Type |
+|-----------------------|---------------------------|---------|------|
+| TOMCAT_ADMIN          |                           | admin  | Env |
+| TOMCAT_ADMIN_PASSWORD |                           |        | Secret |
+
+## Image Structure Test
+    container-structure-test test --image leadstec/tomcat:tag --config tests/tomcat.yaml
+
+## CHANGELOG
+
+**2020/10/04**
+* Update: Tomcat 9.0.38
 
 **8.5.35 2018-12-04**
 * 更新版本
