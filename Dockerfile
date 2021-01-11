@@ -1,16 +1,13 @@
 #
 # Author            Frank,H.L.Lai <frank@leadstec.com>
-# Docker Version    19.03
+# Docker Version    20.10
 # Website           https://www.leadstec.com
-# Copyright         (C) 2020 LEADSTEC Systems. All rights reserved.
+# Copyright         (C) 2021 LEADSTEC Systems. All rights reserved.
 #
-ARG arch=
-FROM leadstec.tencentcloudcr.com/leadstec/java${arch}:11.0.8
-ARG version=9.0.38
-ARG build=dev
+FROM leadstec/java:11
+ARG version=
 
-LABEL version="${version}-${build}" \
-    description="Tomcat image for VCubi platform" \
+LABEL description="Tomcat image for VCubi platform" \
     maintainer="Frank,H.L.Lai <frank@leadstec.com>"
 
 # set environment variables

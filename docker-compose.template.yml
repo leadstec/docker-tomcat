@@ -6,10 +6,8 @@ services:
     build:
       context: .
       args:
-        - arch=
-        - version=9.0.38
-        - build=dev
-    image: leadstec.tencentcloudcr.com/leadstec/tomcat:9.0.38
+        - version=9.0.41
+    image: leadstec/tomcat:9.0
     ports:
       - "50521:8080"
     volumes:
