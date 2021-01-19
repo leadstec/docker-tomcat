@@ -16,10 +16,10 @@ LEADSTEC: [Official website](https://www.leadstec.com)
     docker pull leadstec/tomcat:latest
 
     # Build image
-    docker-compose build .
+    docker-compose build
 
     # Image Structure Test
-    container-structure-test test --image leadstec/tomcat:tag --config tests/tomcat.yaml
+    container-structure-test test --image leadstec/tomcat:tag --config tests/tomcat.yml
 
 ## LCS Schema & ENV, Secrets
 

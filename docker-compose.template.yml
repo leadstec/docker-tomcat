@@ -16,7 +16,6 @@ services:
     env_file:
       - ./env
     environment:
-      - EMAIL=
       - LCS_LOG_LEVEL=debug
     secrets:
       - lcs
